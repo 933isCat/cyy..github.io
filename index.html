@@ -5,8 +5,63 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./index.css">
+  <script src="./vue.js"></script>
 </head>
 <body>
-  <h1>徐铭烽</h1>
+  <div class="fff" id="app">
+    <div @click="right">></div>
+    <div
+      class="bubu0"
+      :style="{'transform': `rotateY(${myIndex * 45}deg) translate3d(-50%, -50%, 0)`}">
+      <div
+        class="box0"
+        :key="index"
+        v-for="(item, index) in arr.length"
+        :style="{'transform': `rotateY(${360/arr.length * index}deg) translateZ(400px)`}">
+        {{index}}
+      </div>
+      <div
+        class="bu"
+        :style="{'transform': `rotateY(${myIndex * -45}deg) translate3d(-50%, -50%, 151px)`}">
+      </div>
+    </div>
+    <div @click="left"><</div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        myIndex: 0,
+        arr: [0,1,2,3,4,5,6,7],
+        nowIndex: 0
+      },
+      methods: {
+        left() {
+          this.myIndex++
+          if (this.myIndex < 0) {
+            this.nowIndex = this.myIndex % this.arr.length * -1
+          } else if (this.myIndex == 0 || this.myIndex == 8) {
+            this.nowIndex = 0
+          } else if (this.myIndex > 0) {
+            this.nowIndex = this.arr.length - this.myIndex % this.arr.length
+          }
+          console.log('🤡 ❗ left ❗ this.myIndex:', this.nowIndex, this.myIndex)
+        },
+        right() {
+          this.myIndex--
+          if (this.myIndex < 0) {
+            this.nowIndex = this.myIndex % this.arr.length * -1
+          } else if (this.myIndex == 0 || this.myIndex == 8) {
+            this.nowIndex = 0
+          } else if (this.myIndex > 0) {
+            this.nowIndex = this.arr.length - this.myIndex % this.arr.length
+          }
+          console.log('🤡 ❗ left ❗ this.myIndex:', this.nowIndex, this.myIndex)
+        }
+      }
+    })
+  </script>
 </body>
 </html>
